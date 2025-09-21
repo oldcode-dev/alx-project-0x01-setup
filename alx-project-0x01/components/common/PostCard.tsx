@@ -1,28 +1,18 @@
-import React from 'react';
-import { PostCardProps } from '@/interfaces';
+import { PostProps } from "@/interfaces";
 
-const PostCard: React.FC<PostCardProps> = ({ title, author, date, content, imageUrl }) => (
-    <div style={{
-        border: '1px solid #e0e0e0',
-        borderRadius: '8px',
-        padding: '16px',
-        maxWidth: '400px',
-        background: '#fff',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.05)'
-    }}>
-        {imageUrl && (
-            <img
-                src={imageUrl}
-                alt={title}
-                style={{ width: '100%', borderRadius: '6px', marginBottom: '12px' }}
-            />
-        )}
-        <h2 style={{ margin: '0 0 8px 0', fontSize: '1.25rem' }}>{title}</h2>
-        <div style={{ color: '#888', fontSize: '0.9rem', marginBottom: '12px' }}>
-            By {author} • {date}
-        </div>
-        <p style={{ margin: 0 }}>{content}</p>
+const PostCard: React.FC<PostProps> = ({ title, body, userId, id }) => {
+  return (
+    <div className="max-w-xl mx-auto my-6 p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+      <div className="mb-4">
+        <h2 className="text-2xl font-semibold text-gray-800">{title}</h2>
+      </div>
+      <p className="text-gray-600">{body}</p>
+      <div className="mt-4 flex items-center justify-between text-sm text-gray-500">
+        <span>User ID: {userId}</span>
+        <span>Post ID: {id}</span>
+      </div>
     </div>
-);
+  );
+};
 
 export default PostCard;

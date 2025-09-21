@@ -1,17 +1,39 @@
-import React from 'react';
-import { PostProps } from '@/types';
-import Header from '@/components/layout/Header';
+import PostCard from "@/components/common/PostCard";
+import Header from "@/components/layout/Header";
+import { PostProps } from "@/interfaces";
 
-const Post: React.FC<PostProps> = ({ title, content, author, date }) => (
-    <article style={{ border: '1px solid #ccc', padding: '1rem', marginBottom: '1rem' }}>
-        <Header />
-        <h2>{title}</h2>
-        <p>{content}</p>
-        <div style={{ fontSize: '0.9rem', color: '#555' }}>
-            {author && <span>By {author}</span>}
-            {date && <span> | {date}</span>}
+const Posts: React.FC<PostProps[]> = ({ posts }) => {
+  console.log(posts)
+  return (
+    <div className="flex flex-col h-screen">
+      <Header />
+      <main className="p-4">
+        <div className="flex justify-between">
+        <h1 className=" text-2xl font-semibold">Post Content</h1>
+        <button className="bg-blue-700 px-4 py-2 rounded-full text-white">Add Post</button>
         </div>
-    </article>
-);
+        <div className="grid grid-cols-3 gap-2 ">
+          {
+            posts?.map(({ title, body, userId, id }: PostProps, key: number) => (
+              <PostCard title={title} body={body} userId={userId} id={id} key={key} />
+            ))
+          }
+        </div>
+      </main>
+    </div>
+  )
+}
 
-export default Post;
+
+export async function getStaticProps() {
+  const response = await fetch("https://jsonplaceholder.typicode.com/posts")
+  const posts = await response.json()
+
+  return {
+    props: {
+      posts
+    }
+  }
+}
+
+export default Posts;
