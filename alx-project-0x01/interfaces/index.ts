@@ -13,6 +13,13 @@ export interface PostProps {
   body: string;
 }
 
+export interface PostsPageProps {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+}
+
 export interface UserProps {
   id: number;
   name: string;
