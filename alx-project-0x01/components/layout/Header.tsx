@@ -1,23 +1,25 @@
-import React from 'react';
+import Link from 'next/link'; 
 
 const Header: React.FC = () => {
-    return (
-        <header style={{
-            width: '100%',
-            padding: '1rem 2rem',
-            backgroundColor: '#222',
-            color: '#fff',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between'
-        }}>
-            <h1 style={{ margin: 0, fontSize: '1.5rem' }}>My Project</h1>
-            <nav>
-                <a href="/" style={{ color: '#fff', marginRight: '1rem', textDecoration: 'none' }}>Home</a>
-                <a href="/about" style={{ color: '#fff', textDecoration: 'none' }}>About</a>
-            </nav>
-        </header>
-    );
-};
+  return (
+    <header className="bg-blue-600 text-white shadow-md py-4">
+      <div className="container mx-auto flex justify-between items-center px-4">
+        <h3 className="font-bold text-2xl">
+     <Link href="/">Daily Contents</Link>
+  </h3>
+        <nav>
+          <ul className="flex space-x-6">
+            <li className="hover:underline">
+              <Link href="/posts">Posts</Link>
+            </li>
+            <li className="hover:underline">
+              <Link href="/users">Users</Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+  );
+}
 
 export default Header;
